@@ -1,0 +1,331 @@
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0ea5a0;
+  --accent-dark: #0a8d89;
+  --accent-soft: #6ee7b7;
+  --info: #22d3ee;
+  --success: #22c55e;
+  --success-soft: #dcfce7;
+  --error: #ef4444;
+  --error-soft: #fee2e2;
+  --border: #cbd5e1;
+  --shadow-sm: 0 1px 6px rgba(15, 23, 42, 0.08);
+  --shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 10px 28px rgba(15, 23, 42, 0.18);
+  --radius: 12px;
+  --transition: 240ms ease;
+  --transition-slow: 320ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  padding: 1.2rem;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+#sidebar-logo h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.45rem;
+  letter-spacing: 1px;
+  color: var(--accent-dark);
+}
+
+#sidebar-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#sidebar-nav a {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.68rem 0.85rem;
+  border-radius: 10px;
+  transition: background var(--transition), color var(--transition), opacity var(--transition);
+}
+
+#sidebar-nav a:hover {
+  background: rgba(14, 165, 160, 0.12);
+}
+
+#sidebar-nav a.active {
+  background: linear-gradient(135deg, rgba(14, 165, 160, 0.2), rgba(59, 130, 246, 0.2));
+  font-weight: 600;
+  color: #0f172a;
+}
+
+#sidebar-nav a.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+#sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.user-badge {
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: rgba(14, 165, 160, 0.07);
+  border: 1px solid rgba(14, 165, 160, 0.2);
+  border-radius: var(--radius);
+  padding: 0.6rem;
+}
+
+#logout-button {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.65rem 0.75rem;
+  transition: background var(--transition), border var(--transition), transform var(--transition);
+}
+
+#logout-button:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--error);
+  transform: translateY(-1px);
+}
+
+#content {
+  margin-left: 230px;
+  padding: 1.5rem;
+  width: calc(100% - 230px);
+  transition: margin var(--transition);
+}
+
+section {
+  max-width: 900px;
+  margin-bottom: 1.8rem;
+  animation: enter 0.45s var(--transition-slow) ease-out both;
+}
+
+.section {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.banner {
+  background: linear-gradient(120deg, #0ea5a0 0%, #3b82f6 50%, #8b5cf6 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.22) 1px, transparent 0), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.16) 1px, transparent 0);
+  background-size: 16px 16px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.banner > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.2rem;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+form {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.72rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 160, 0.18);
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  padding: 0.66rem 1.1rem;
+  font-weight: 600;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.button-primary,
+button[type="submit"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+}
+
+.button-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+}
+
+.button-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--accent);
+}
+
+button:hover,
+.button-primary:hover,
+.button-success:hover,
+.button-outline:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.alert {
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  background: var(--success-soft);
+  border-color: #a7f3d0;
+  color: #166534;
+}
+
+.alert-error {
+  background: var(--error-soft);
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  #sidebar {
+    width: 64px;
+    padding: 1rem 0.6rem;
+    border-right: 1px solid var(--border);
+  }
+
+  #sidebar-logo h1 {
+    font-size: 1.1rem;
+    text-indent: -999px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  #sidebar-nav ul {
+    gap: 0.35rem;
+  }
+
+  #sidebar-nav a {
+    padding: 0.65rem;
+    text-align: center;
+  }
+
+  #content {
+    margin-left: 64px;
+    width: calc(100% - 64px);
+  }
+
+  #sidebar-footer {
+    align-items: center;
+  }
+
+  .user-badge {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+
+  #logout-button {
+    padding: 0.5rem;
+    font-size: 0.76rem;
+  }
+}
